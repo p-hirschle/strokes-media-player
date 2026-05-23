@@ -1,6 +1,6 @@
 # 'Reality Awaits' Media Player 
 
-Um *media player* com estética western/cowboy que referencia o álbum 'Reality Awaits' da banda The Strokes, desenvolvido usando SvelteKit, TypeScript, Tailwind CSS, e Howler.js.
+Um *media player* com estética western/cowboy que referencia o álbum 'Reality Awaits' da banda The Strokes, desenvolvido usando SvelteKit, TypeScript, Tailwind CSS, e Howler.js.    
 Acesse em: https://realityawaits.vercel.app
 
 ## Funcionalidades
