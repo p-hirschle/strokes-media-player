@@ -41,7 +41,8 @@
 	});
 </script>
 
-<div class="glass rounded-2xl p-6 md:p-8 red-glow">
+<div class="glass dust-card rounded-2xl p-6 md:p-8 red-glow">
+	<div class="dust-card-content">
 	{#if $player.showLyrics}
 		<div class="h-full">
 			<div class="flex items-center justify-between mb-6">
@@ -194,4 +195,5 @@
 			/>
 		</div>
 	{/if}
+	</div>
 </div>

@@ -23,22 +23,15 @@
 
 <div class="min-h-screen relative flex flex-col font-contax">
 	<div class="absolute inset-0 overflow-hidden">
-		<video 
-			src="/visuals/cowboy-riding.mp4" 
-			autoplay 
-			loop 
-			muted 
-			playsinline
-			class="w-full h-full object-cover"
-			style="object-position: center 20%;"
-		>
-			<img 
-				src="/visuals/cowboy-bg.jpg" 
-				alt=""
-				class="w-full h-full object-cover"
-				style="object-position: center 20%;"
-			/>
-		</video>
+		<div class="cinematic-bg-x" aria-hidden="true">
+			<div class="cinematic-bg-y">
+				<img
+					src="/visuals/cowboy-bg.jpg"
+					alt=""
+					class="cinematic-bg-image"
+				/>
+			</div>
+		</div>
 		<div class="absolute inset-0 bg-deep-black/70"></div>
 		<div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-deep-black/80"></div>
 	</div>
@@ -67,4 +60,59 @@
 			<TrackList />
 		</div>
 	</main>
+
+	<style>
+		@keyframes cinematic-drift-x {
+			0% {
+				transform: translate3d(-1.6%, 0, 0);
+			}
+			100% {
+				transform: translate3d(1.35%, 0, 0);
+			}
+		}
+
+		@keyframes cinematic-drift-y {
+			0% {
+				transform: translate3d(0, -0.75%, 0);
+			}
+			100% {
+				transform: translate3d(0, 0.55%, 0);
+			}
+		}
+
+		@keyframes cinematic-zoom {
+			0% {
+				transform: scale(1.11);
+			}
+			100% {
+				transform: scale(1.18);
+			}
+		}
+
+		.cinematic-bg-x,
+		.cinematic-bg-y,
+		.cinematic-bg-image {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			will-change: transform;
+		}
+
+		.cinematic-bg-x {
+			animation: cinematic-drift-x 52s ease-in-out infinite alternate;
+		}
+
+		.cinematic-bg-y {
+			animation: cinematic-drift-y 67s ease-in-out infinite alternate;
+		}
+
+		.cinematic-bg-image {
+			object-fit: cover;
+			object-position: center 20%;
+			animation: cinematic-zoom 24s ease-in-out infinite alternate;
+			filter: sepia(0.18) saturate(0.9) contrast(1.05);
+			transform-origin: center 20%;
+		}
+	</style>
 </div>

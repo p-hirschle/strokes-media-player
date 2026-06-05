@@ -76,6 +76,74 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.dust-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, rgba(82, 58, 39, 0.5), rgba(24, 19, 15, 0.74) 55%, rgba(48, 36, 25, 0.68)),
+    rgba(26, 26, 26, 0.7);
+}
+
+.dust-card::before,
+.dust-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dust-card::before {
+  opacity: 0.52;
+  background-image:
+    radial-gradient(circle at 12% 72%, rgba(232, 207, 151, 0.28) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 38% 22%, rgba(232, 207, 151, 0.2) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 72% 46%, rgba(255, 236, 183, 0.18) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 86% 78%, rgba(196, 163, 90, 0.2) 0 0.9px, transparent 1.5px);
+  background-size: 92px 72px, 134px 96px, 176px 118px, 118px 146px;
+  filter: blur(0.15px);
+  animation: dust-float 24s linear infinite;
+}
+
+.dust-card::after {
+  opacity: 0.2;
+  background:
+    radial-gradient(ellipse at 20% 85%, rgba(232, 207, 151, 0.18), transparent 34%),
+    radial-gradient(ellipse at 80% 15%, rgba(255, 240, 196, 0.12), transparent 30%),
+    linear-gradient(110deg, transparent 20%, rgba(232, 207, 151, 0.08) 44%, transparent 62%);
+  transform: translate3d(-8%, 5%, 0);
+  animation: dust-haze 18s ease-in-out infinite alternate;
+}
+
+.dust-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes dust-float {
+  0% {
+    background-position: 0 0, 34px 12px, 18px 44px, 60px 8px;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0.45%, -0.7%, 0);
+  }
+  100% {
+    background-position: 92px -72px, -100px -84px, 194px -74px, -58px -138px;
+    transform: translate3d(0.9%, -1.4%, 0);
+  }
+}
+
+@keyframes dust-haze {
+  0% {
+    transform: translate3d(-8%, 5%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(7%, -4%, 0) scale(1.08);
+  }
+}
+
 /* Subtle sepia glow */
 .red-glow {
   box-shadow: 0 0 40px rgba(196, 163, 90, 0.2);

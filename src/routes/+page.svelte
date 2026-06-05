@@ -126,14 +126,18 @@
 	<style>
 		@keyframes zoom-in {
 			0% {
-				transform: scale(1);
+				transform: scale(1) translate3d(0, 0, 0);
+			}
+			55% {
+				transform: scale(1.18) translate3d(-1.5%, 1%, 0);
 			}
 			100% {
-				transform: scale(1.05);
+				transform: scale(1.08) translate3d(1%, -0.75%, 0);
 			}
 		}
 		.animate-zoom-in {
-			animation: zoom-in 7s ease-out forwards;
+			animation: zoom-in 15s ease-in-out infinite alternate;
+			transform-origin: center center;
 		}
 	</style>
 </div>
