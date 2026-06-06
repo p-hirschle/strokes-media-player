@@ -8,7 +8,7 @@ export interface Track {
   lyrics?: string;
 }
 
-export const tracks: Track[] = [
+export const realityAwaitsTracks: Track[] = [
   {
     id: 1,
     title: "Psycho Shit",
@@ -218,3 +218,80 @@ export const tracks: Track[] = [
     visual: "/visuals/cowboy-bg.jpg"
   },
 ];
+
+export const theNewAbnormalTracks: Track[] = [
+  {
+    id: 101,
+    title: "The Adults Are Talking",
+    artist: "The Strokes",
+    src: "/music/the-new-abnormal/adults.mp3",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  },
+  {
+    id: 102,
+    title: "Selfless",
+    artist: "The Strokes",
+    src: "/music/the-new-abnormal/selfless.mp3",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  },
+  {
+    id: 103,
+    title: "Brooklyn Bridge To Chorus",
+    artist: "The Strokes",
+    src: "/music/the-new-abnormal/brooklyn.mp3",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  },
+  {
+    id: 104,
+    title: "Bad Decisions",
+    artist: "The Strokes",
+    src: "/music/the-new-abnormal/bad.mp3",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  },
+  {
+    id: 105,
+    title: "Eternal Summer",
+    artist: "The Strokes",
+    src: "",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  },
+  {
+    id: 106,
+    title: "At The Door",
+    artist: "The Strokes",
+    src: "",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  },
+  {
+    id: 107,
+    title: "Why Are Sundays So Depressing",
+    artist: "The Strokes",
+    src: "",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  },
+  {
+    id: 108,
+    title: "Not The Same Anymore",
+    artist: "The Strokes",
+    src: "",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  },
+  {
+    id: 109,
+    title: "Ode To The Mets",
+    artist: "The Strokes",
+    src: "",
+    cover: "/visuals/abnormal-cover.jpg",
+    visual: "/visuals/abnormal-bg.jpg"
+  }
+];
+
+export const tracks = realityAwaitsTracks;

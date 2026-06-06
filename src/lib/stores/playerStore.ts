@@ -23,10 +23,12 @@ const createPlayerStore = () => {
 
   let howl: Howl | null = null;
   let currentIndex = 0;
+  let activeTracks: Track[] = tracks;
+  let progressTimer: ReturnType<typeof setInterval> | null = null;
 
   const loadTrack = (index: number) => {
     currentIndex = index;
-    const track = tracks[index];
+    const track = activeTracks[index];
 
     if (howl) {
       howl.unload();
@@ -38,6 +40,11 @@ const createPlayerStore = () => {
       progress: 0,
       duration: 0
     }));
+
+    if (!track?.src) {
+      howl = null;
+      return;
+    }
 
     howl = new Howl({
       src: [track.src],
@@ -69,7 +76,11 @@ const createPlayerStore = () => {
       }
     });
 
-    setInterval(() => {
+    if (progressTimer) {
+      clearInterval(progressTimer);
+    }
+
+    progressTimer = setInterval(() => {
       if (howl && howl.playing()) {
         update(state => ({
           ...state,
@@ -103,13 +114,13 @@ const createPlayerStore = () => {
   };
 
   const next = () => {
-    const nextIndex = (currentIndex + 1) % tracks.length;
+    const nextIndex = (currentIndex + 1) % activeTracks.length;
     loadTrack(nextIndex);
     play();
   };
 
   const previous = () => {
-    const prevIndex = (currentIndex - 1 + tracks.length) % tracks.length;
+    const prevIndex = (currentIndex - 1 + activeTracks.length) % activeTracks.length;
     loadTrack(prevIndex);
     play();
   };
@@ -133,12 +144,17 @@ const createPlayerStore = () => {
       howl.unload();
       howl = null;
     }
+    if (progressTimer) {
+      clearInterval(progressTimer);
+      progressTimer = null;
+    }
     update(state => ({
       ...state,
       currentTrack: null,
       isPlaying: false,
       progress: 0,
-      duration: 0
+      duration: 0,
+      showLyrics: false
     }));
   };
 
@@ -146,8 +162,15 @@ const createPlayerStore = () => {
     update(state => ({ ...state, showLyrics: !state.showLyrics }));
   };
 
+  const setPlaylist = (playlist: Track[]) => {
+    activeTracks = playlist;
+    currentIndex = 0;
+    stop();
+  };
+
   return {
     subscribe,
+    setPlaylist,
     play,
     pause,
     togglePlay,

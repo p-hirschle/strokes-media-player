@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { player } from '$lib/stores/playerStore';
-	import { tracks } from '$lib/data/tracks';
+	import { realityAwaitsTracks } from '$lib/data/tracks';
 	import PlayerControls from '$lib/components/PlayerControls.svelte';
 	import TrackList from '$lib/components/TrackList.svelte';
 
@@ -12,7 +12,8 @@
 	};
 
 	onMount(() => {
-		const firstAvailableIndex = tracks.findIndex(track => track.src.length > 0);
+		player.setPlaylist(realityAwaitsTracks);
+		const firstAvailableIndex = realityAwaitsTracks.findIndex(track => track.src.length > 0);
 		if (firstAvailableIndex !== -1) {
 			player.selectTrack(firstAvailableIndex);
 		} else {
@@ -32,8 +33,8 @@
 				/>
 			</div>
 		</div>
-		<div class="absolute inset-0 bg-deep-black/70"></div>
-		<div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-deep-black/80"></div>
+		<div class="absolute inset-0 bg-deep-black/56"></div>
+		<div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-deep-black/60"></div>
 	</div>
 	
 	<div class="grain-overlay"></div>
@@ -57,7 +58,7 @@
 		</div>
 		
 		<div class="w-full md:w-1/2 max-w-md">
-			<TrackList />
+			<TrackList tracks={realityAwaitsTracks} />
 		</div>
 	</main>
 

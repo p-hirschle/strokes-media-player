@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { player } from '$lib/stores/playerStore';
-	import { tracks } from '$lib/data/tracks';
 	import { onMount, tick } from 'svelte';
+
+	export let variant: 'reality' | 'abnormal' = 'reality';
 
 	let titleContainer: HTMLDivElement;
 	let titleText: HTMLSpanElement;
@@ -41,7 +42,7 @@
 	});
 </script>
 
-<div class="glass dust-card rounded-2xl p-6 md:p-8 red-glow">
+<div class="glass dust-card player-shell rounded-2xl p-6 md:p-8 red-glow" class:abnormal-player={variant === 'abnormal'}>
 	<div class="dust-card-content">
 	{#if $player.showLyrics}
 		<div class="h-full">
@@ -70,28 +71,30 @@
 						src={$player.currentTrack.cover} 
 						alt={$player.currentTrack.title}
 						class="w-full h-full object-cover"
-						style="filter: sepia(0.6) hue-rotate(-10deg);"
+						style={variant === 'abnormal' ? 'filter: saturate(1.08) contrast(1.04);' : 'filter: sepia(0.6) hue-rotate(-10deg);'}
 					/>
 				</div>
 				<div class="flex-1 min-w-0 overflow-hidden" bind:this={titleContainer}>
 					<span class="absolute opacity-0 text-xl md:text-2xl font-medium whitespace-nowrap pointer-events-none" bind:this={titleText}>
 						{$player.currentTrack.title}
 					</span>
-					{#if isOverflowing}
-						<div class="animate-marquee whitespace-nowrap inline-block">
-							<h2 class="text-xl md:text-2xl font-medium text-soft-white inline-block">
+					{#key $player.currentTrack.id}
+						{#if isOverflowing}
+							<div class="animate-marquee whitespace-nowrap inline-block">
+								<h2 class="text-xl md:text-2xl font-medium text-soft-white inline-block">
+									{$player.currentTrack.title}
+								</h2>
+								<span class="inline-block w-8"></span>
+								<h2 class="text-xl md:text-2xl font-medium text-soft-white inline-block">
+									{$player.currentTrack.title}
+								</h2>
+							</div>
+						{:else}
+							<h2 class="text-xl md:text-2xl font-medium text-soft-white truncate">
 								{$player.currentTrack.title}
 							</h2>
-							<span class="inline-block w-8"></span>
-							<h2 class="text-xl md:text-2xl font-medium text-soft-white inline-block">
-								{$player.currentTrack.title}
-							</h2>
-						</div>
-					{:else}
-						<h2 class="text-xl md:text-2xl font-medium text-soft-white truncate">
-							{$player.currentTrack.title}
-						</h2>
-					{/if}
+						{/if}
+					{/key}
 					<p class="text-soft-white/60 text-lg">{$player.currentTrack.artist}</p>
 				</div>
 			</div>
@@ -105,7 +108,7 @@
 				value={$player.progress}
 				on:input={handleSeek}
 				class="w-full h-2 rounded-full appearance-none cursor-pointer transition-all"
-				style="background: rgba(170, 146, 94, 0.11); accent-color: #e0e0e0;"
+				style={variant === 'abnormal' ? 'background: rgba(55, 117, 161, 0.18); accent-color: #3775A1;' : 'background: rgba(170, 146, 94, 0.11); accent-color: #e0e0e0;'}
 			/>
 			<div class="flex justify-between text-sm text-soft-white/70 mt-2 font-mono">
 				<span>{formatTime($player.progress)}</span>
@@ -128,7 +131,8 @@
 			
 			<button 
 				on:click={player.togglePlay}
-				class="w-16 h-16 flex items-center justify-center bg-dark-sand hover:bg-dark-sand/90 text-soft-white rounded-full transition-all hover:scale-105 shadow-lg shadow-dark-sand/30 mx-6"
+				class="w-16 h-16 flex items-center justify-center play-button text-soft-white rounded-full transition-all hover:scale-105 shadow-lg mx-6"
+				class:abnormal-play={variant === 'abnormal'}
 			>
 				{#if $player.isPlaying}
 					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -191,9 +195,37 @@
 				value={$player.volume}
 				on:input={handleVolume}
 				class="flex-1 h-2 rounded-full appearance-none cursor-pointer transition-all"
-				style="background: rgba(170, 146, 94, 0.11); accent-color: #e0e0e0;"
+				style={variant === 'abnormal' ? 'background: rgba(55, 117, 161, 0.18); accent-color: #3775A1;' : 'background: rgba(170, 146, 94, 0.11); accent-color: #e0e0e0;'}
 			/>
 		</div>
 	{/if}
 	</div>
 </div>
+
+<style>
+	.play-button {
+		background: #746751ff;
+		box-shadow: 0 10px 15px -3px rgba(116, 103, 81, 0.3);
+	}
+
+	.play-button:hover {
+		background: rgba(116, 103, 81, 0.9);
+	}
+
+	.abnormal-player {
+		background:
+			linear-gradient(145deg, rgba(31, 71, 104, 0.62), rgba(13, 13, 13, 0.8) 56%, rgba(55, 117, 161, 0.34)),
+			rgba(18, 18, 18, 0.76);
+		border-color: rgba(55, 117, 161, 0.28);
+		box-shadow: 0 0 46px rgba(55, 117, 161, 0.22);
+	}
+
+	.abnormal-play {
+		background: #3775A1;
+		box-shadow: 0 12px 28px rgba(55, 117, 161, 0.36);
+	}
+
+	.abnormal-play:hover {
+		background: #4689b9;
+	}
+</style>
