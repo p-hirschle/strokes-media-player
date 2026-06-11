@@ -66,12 +66,12 @@
 	{:else}
 		{#if $player.currentTrack}
 			<div class="flex items-center gap-6 mb-8">
-				<div class="w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden flex-shrink-0 shadow-2xl">
+				<div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden flex-shrink-0 shadow-2xl {variant === 'abnormal' ? 'abnormal-cover-frame' : 'rounded-lg'}">
 					<img 
 						src={$player.currentTrack.cover} 
 						alt={$player.currentTrack.title}
 						class="w-full h-full object-cover"
-						style={variant === 'abnormal' ? 'filter: saturate(1.08) contrast(1.04);' : 'filter: sepia(0.6) hue-rotate(-10deg);'}
+						style={variant === 'abnormal' ? 'filter: sepia(0.50) saturate(1.28) hue-rotate(18deg) contrast(1.05) brightness(1.02);' : 'filter: sepia(0.6) hue-rotate(-10deg);'}
 					/>
 				</div>
 				<div class="flex-1 min-w-0 overflow-hidden" bind:this={titleContainer}>
@@ -270,8 +270,17 @@
 
 	.abnormal-player img {
 		border: 0;
-		border-radius: 3px;
+		border-radius: 0;
 		box-shadow: 5px 6px 0 rgba(20, 53, 77, 0.28);
+	}
+
+	.abnormal-cover-frame {
+		border-radius: 0;
+		clip-path: polygon(0 0, 86% 0, 100% 13%, 100% 100%, 17% 100%, 0 84%);
+	}
+
+	.abnormal-cover-frame img {
+		clip-path: polygon(0 0, 86% 0, 100% 13%, 100% 100%, 17% 100%, 0 84%);
 	}
 
 	.abnormal-play {

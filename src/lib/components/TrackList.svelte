@@ -34,12 +34,12 @@
 							{track.artist}
 						</p>
 					</div>
-					<div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 group-hover:opacity-100 transition-opacity {$player.currentTrack?.id === track.id ? 'opacity-100' : 'opacity-50'}">
+					<div class="w-10 h-10 overflow-hidden flex-shrink-0 group-hover:opacity-100 transition-opacity {variant === 'abnormal' ? 'abnormal-cover-frame' : 'rounded-lg'} {$player.currentTrack?.id === track.id ? 'opacity-100' : 'opacity-50'}">
 						<img
 							src={track.cover}
 							alt={track.title}
 							class="w-full h-full object-cover"
-							style={variant === 'abnormal' ? 'filter: saturate(1.08) contrast(1.04);' : 'filter: sepia(0.6) hue-rotate(-10deg);'}
+							style={variant === 'abnormal' ? 'filter: sepia(0.50) saturate(1.28) hue-rotate(18deg) contrast(1.05) brightness(1.02);' : 'filter: sepia(0.6) hue-rotate(-10deg);'}
 						/>
 					</div>
 				</button>
@@ -154,7 +154,16 @@
 
 	.abnormal-track-list img {
 		border: 0;
-		border-radius: 3px;
+		border-radius: 0;
 		box-shadow: 3px 4px 0 rgba(20, 53, 77, 0.24);
+	}
+
+	.abnormal-cover-frame {
+		border-radius: 0;
+		clip-path: polygon(0 0, 86% 0, 100% 13%, 100% 100%, 17% 100%, 0 84%);
+	}
+
+	.abnormal-cover-frame img {
+		clip-path: polygon(0 0, 86% 0, 100% 13%, 100% 100%, 17% 100%, 0 84%);
 	}
 </style>

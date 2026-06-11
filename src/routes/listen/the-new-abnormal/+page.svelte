@@ -42,13 +42,13 @@
 	<header class="relative z-20 p-6 md:p-8">
 		<button
 			on:click={goBack}
-			class="flex items-center gap-2 text-red/70 hover:text-red transition-all hover:scale-105"
+			class="abnormal-back-paper flex items-center gap-2 text-red/70 hover:text-red transition-all hover:scale-105"
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
 				<line x1="19" y1="12" x2="5" y2="12"></line>
 				<polyline points="12 19 5 12 12 5"></polyline>
 			</svg>
-			<span class="text-sm tracking-wider">BACK</span>
+			<span class="text-sm tracking-wider">back;</span>
 		</button>
 	</header>
 
@@ -126,6 +126,33 @@
 
 		.player-stage {
 			transform: translateY(-1rem);
+		}
+
+		.abnormal-back-paper {
+			position: relative;
+			padding: 0.1rem 0.18rem;
+			width: fit-content;
+			color: #14354d;
+			line-height: 1;
+			background:
+				linear-gradient(0deg, rgba(20, 53, 77, 0.1) 0 1px, transparent 1px 100%),
+				linear-gradient(90deg, rgba(239, 101, 21, 0.08) 0 1px, transparent 1px 100%),
+				#f5eddb;
+			background-size:
+				100% 10px,
+				14px 100%,
+				auto;
+			clip-path: polygon(3% 12%, 96% 0, 100% 78%, 6% 100%, 0 48%);
+			box-shadow:
+				3px 4px 0 rgba(10, 10, 10, 0.48),
+				0 0 14px rgba(255, 122, 0, 0.18);
+			transform: rotate(-0.35deg);
+		}
+
+		.abnormal-back-paper:hover,
+		.abnormal-back-paper:focus-visible {
+			color: #ef6515;
+			filter: saturate(1.08) contrast(1.04);
 		}
 
 		@media (min-width: 768px) {
